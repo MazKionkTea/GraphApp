@@ -1,0 +1,858 @@
+{
+  "project_root": "/workspace",
+  "summary": {
+    "packages": 0,
+    "modules": 4,
+    "classes": 6,
+    "functions": 84,
+    "total_entities": 94
+  },
+  "entities": [
+    {
+      "fqn": "phase2_tracer",
+      "type": "module",
+      "file_path": "phase2_tracer.py",
+      "line_start": 1,
+      "line_end": 1200,
+      "parent_fqn": null,
+      "name": "phase2_tracer"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer",
+      "type": "class",
+      "file_path": "phase2_tracer.py",
+      "line_start": 31,
+      "line_end": 1189,
+      "parent_fqn": "phase2_tracer",
+      "name": "Phase2Tracer"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer.__init__",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 34,
+      "line_end": 66,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "__init__"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._load_phase1_data",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 70,
+      "line_end": 84,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_load_phase1_data"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._scan_py_files",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 86,
+      "line_end": 94,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_scan_py_files"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._get_source_type",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 98,
+      "line_end": 105,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_get_source_type"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._get_module_name",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 107,
+      "line_end": 116,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_get_module_name"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._get_terminal_cmd",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 118,
+      "line_end": 129,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_get_terminal_cmd"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer.show_menu",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 133,
+      "line_end": 172,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "show_menu"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._settings_menu",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 176,
+      "line_end": 206,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_settings_menu"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._select_directory",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 210,
+      "line_end": 253,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_select_directory"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._select_target_script",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 255,
+      "line_end": 334,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_select_target_script"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._run_tracing",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 338,
+      "line_end": 355,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_run_tracing"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._run_standard_tracing",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 359,
+      "line_end": 519,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_run_standard_tracing"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._run_advanced_tracing",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 523,
+      "line_end": 563,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_run_advanced_tracing"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._run_dynamic_terminal",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 565,
+      "line_end": 597,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_run_dynamic_terminal"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._run_dynamic_background",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 599,
+      "line_end": 633,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_run_dynamic_background"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._generate_runner_script",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 635,
+      "line_end": 852,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_generate_runner_script"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._display_summary",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 856,
+      "line_end": 874,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_display_summary"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._show_post_trace_menu",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 878,
+      "line_end": 935,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_show_post_trace_menu"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._display_edge_list",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 939,
+      "line_end": 1003,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_display_edge_list"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._export_json",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 1007,
+      "line_end": 1027,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_export_json"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._export_xml",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 1029,
+      "line_end": 1058,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_export_xml"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._export_dot",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 1060,
+      "line_end": 1117,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_export_dot"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._export_md",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 1119,
+      "line_end": 1164,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_export_md"
+    },
+    {
+      "fqn": "phase2_tracer.Phase2Tracer._export_csv",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 1166,
+      "line_end": 1189,
+      "parent_fqn": "phase2_tracer.Phase2Tracer",
+      "name": "_export_csv"
+    },
+    {
+      "fqn": "phase2_tracer.CallCollector",
+      "type": "class",
+      "file_path": "phase2_tracer.py",
+      "line_start": 371,
+      "line_end": 418,
+      "parent_fqn": "phase2_tracer",
+      "name": "CallCollector"
+    },
+    {
+      "fqn": "phase2_tracer.CallCollector.__init__",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 372,
+      "line_end": 376,
+      "parent_fqn": "phase2_tracer.CallCollector",
+      "name": "__init__"
+    },
+    {
+      "fqn": "phase2_tracer.CallCollector.visit_ClassDef",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 378,
+      "line_end": 381,
+      "parent_fqn": "phase2_tracer.CallCollector",
+      "name": "visit_ClassDef"
+    },
+    {
+      "fqn": "phase2_tracer.CallCollector.visit_FunctionDef",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 383,
+      "line_end": 386,
+      "parent_fqn": "phase2_tracer.CallCollector",
+      "name": "visit_FunctionDef"
+    },
+    {
+      "fqn": "phase2_tracer.CallCollector.visit_AsyncFunctionDef",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 388,
+      "line_end": 391,
+      "parent_fqn": "phase2_tracer.CallCollector",
+      "name": "visit_AsyncFunctionDef"
+    },
+    {
+      "fqn": "phase2_tracer.CallCollector.visit_Call",
+      "type": "method",
+      "file_path": "phase2_tracer.py",
+      "line_start": 393,
+      "line_end": 418,
+      "parent_fqn": "phase2_tracer.CallCollector",
+      "name": "visit_Call"
+    },
+    {
+      "fqn": "phase2_tracer.main",
+      "type": "function",
+      "file_path": "phase2_tracer.py",
+      "line_start": 1194,
+      "line_end": 1196,
+      "parent_fqn": "phase2_tracer",
+      "name": "main"
+    },
+    {
+      "fqn": "phase4_enricher",
+      "type": "module",
+      "file_path": "phase4_enricher.py",
+      "line_start": 1,
+      "line_end": 771,
+      "parent_fqn": null,
+      "name": "phase4_enricher"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher",
+      "type": "class",
+      "file_path": "phase4_enricher.py",
+      "line_start": 51,
+      "line_end": 762,
+      "parent_fqn": "phase4_enricher",
+      "name": "Phase4Enricher"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher.__init__",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 52,
+      "line_end": 74,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "__init__"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._load_phase3",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 78,
+      "line_end": 94,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_load_phase3"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher.process",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 98,
+      "line_end": 203,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "process"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._compute_global_stats",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 205,
+      "line_end": 251,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_compute_global_stats"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._show_post_enrich_menu",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 255,
+      "line_end": 318,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_show_post_enrich_menu"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._display_entry_points",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 322,
+      "line_end": 330,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_display_entry_points"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._display_leaf_functions",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 332,
+      "line_end": 340,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_display_leaf_functions"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._display_list_with_pagination",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 342,
+      "line_end": 386,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_display_list_with_pagination"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._export_json",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 390,
+      "line_end": 405,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_export_json"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._export_xml",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 407,
+      "line_end": 458,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_export_xml"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._export_dot",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 460,
+      "line_end": 533,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_export_dot"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._export_md",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 535,
+      "line_end": 590,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_export_md"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._export_csv",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 592,
+      "line_end": 621,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_export_csv"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._display_summary",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 625,
+      "line_end": 672,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_display_summary"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher.show_menu",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 676,
+      "line_end": 717,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "show_menu"
+    },
+    {
+      "fqn": "phase4_enricher.Phase4Enricher._display_stored_result",
+      "type": "method",
+      "file_path": "phase4_enricher.py",
+      "line_start": 719,
+      "line_end": 762,
+      "parent_fqn": "phase4_enricher.Phase4Enricher",
+      "name": "_display_stored_result"
+    },
+    {
+      "fqn": "phase4_enricher.main",
+      "type": "function",
+      "file_path": "phase4_enricher.py",
+      "line_start": 765,
+      "line_end": 767,
+      "parent_fqn": "phase4_enricher",
+      "name": "main"
+    },
+    {
+      "fqn": "phase3_merger",
+      "type": "module",
+      "file_path": "phase3_merger.py",
+      "line_start": 1,
+      "line_end": 773,
+      "parent_fqn": null,
+      "name": "phase3_merger"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger",
+      "type": "class",
+      "file_path": "phase3_merger.py",
+      "line_start": 52,
+      "line_end": 764,
+      "parent_fqn": "phase3_merger",
+      "name": "Phase3Merger"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger.__init__",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 53,
+      "line_end": 74,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "__init__"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._load_phase1",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 78,
+      "line_end": 95,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_load_phase1"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._load_phase2_data",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 97,
+      "line_end": 129,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_load_phase2_data"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger.process",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 133,
+      "line_end": 286,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "process"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._show_post_merge_menu",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 290,
+      "line_end": 350,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_show_post_merge_menu"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._display_edge_list",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 354,
+      "line_end": 426,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_display_edge_list"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._export_json",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 430,
+      "line_end": 445,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_export_json"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._export_xml",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 447,
+      "line_end": 491,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_export_xml"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._export_dot",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 493,
+      "line_end": 561,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_export_dot"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._export_md",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 563,
+      "line_end": 620,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_export_md"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._export_csv",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 622,
+      "line_end": 647,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_export_csv"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._display_summary",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 651,
+      "line_end": 673,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_display_summary"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger.show_menu",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 677,
+      "line_end": 722,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "show_menu"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._select_source",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 724,
+      "line_end": 752,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_select_source"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._toggle_external",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 754,
+      "line_end": 758,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_toggle_external"
+    },
+    {
+      "fqn": "phase3_merger.Phase3Merger._toggle_filter",
+      "type": "method",
+      "file_path": "phase3_merger.py",
+      "line_start": 760,
+      "line_end": 764,
+      "parent_fqn": "phase3_merger.Phase3Merger",
+      "name": "_toggle_filter"
+    },
+    {
+      "fqn": "phase3_merger.main",
+      "type": "function",
+      "file_path": "phase3_merger.py",
+      "line_start": 767,
+      "line_end": 769,
+      "parent_fqn": "phase3_merger",
+      "name": "main"
+    },
+    {
+      "fqn": "phase1_scanner",
+      "type": "module",
+      "file_path": "phase1_scanner.py",
+      "line_start": 1,
+      "line_end": 777,
+      "parent_fqn": null,
+      "name": "phase1_scanner"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner",
+      "type": "class",
+      "file_path": "phase1_scanner.py",
+      "line_start": 41,
+      "line_end": 680,
+      "parent_fqn": "phase1_scanner",
+      "name": "Phase1Scanner"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.__init__",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 44,
+      "line_end": 58,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "__init__"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner._get_fqn",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 62,
+      "line_end": 63,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "_get_fqn"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner._is_package",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 65,
+      "line_end": 66,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "_is_package"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner._get_relative_path",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 68,
+      "line_end": 74,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "_get_relative_path"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 78,
+      "line_end": 168,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "_parse_file"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 172,
+      "line_end": 264,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "scan_directory"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 268,
+      "line_end": 338,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "display_tree"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.export_json",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 341,
+      "line_end": 358,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "export_json"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 361,
+      "line_end": 393,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "export_xml"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 396,
+      "line_end": 432,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "export_md"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 435,
+      "line_end": 481,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "export_dot"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 484,
+      "line_end": 508,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "export_csv"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 511,
+      "line_end": 575,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "export_html"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 578,
+      "line_end": 670,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "display_entity_table"
+    },
+    {
+      "fqn": "phase1_scanner.Phase1Scanner.reset",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 673,
+      "line_end": 680,
+      "parent_fqn": "phase1_scanner.Phase1Scanner",
+      "name": "reset"
+    },
+    {
+      "fqn": "phase1_scanner.FunctionCollector",
+      "type": "class",
+      "file_path": "phase1_scanner.py",
+      "line_start": 103,
+      "line_end": 124,
+      "parent_fqn": "phase1_scanner",
+      "name": "FunctionCollector"
+    },
+    {
+      "fqn": "phase1_scanner.FunctionCollector.__init__",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 104,
+      "line_end": 107,
+      "parent_fqn": "phase1_scanner.FunctionCollector",
+      "name": "__init__"
+    },
+    {
+      "fqn": "phase1_scanner.FunctionCollector.visit_ClassDef",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 109,
+      "line_end": 114,
+      "parent_fqn": "phase1_scanner.FunctionCollector",
+      "name": "visit_ClassDef"
+    },
+    {
+      "fqn": "phase1_scanner.FunctionCollector.visit_FunctionDef",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 116,
+      "line_end": 119,
+      "parent_fqn": "phase1_scanner.FunctionCollector",
+      "name": "visit_FunctionDef"
+    },
+    {
+      "fqn": "phase1_scanner.FunctionCollector.visit_AsyncFunctionDef",
+      "type": "method",
+      "file_path": "phase1_scanner.py",
+      "line_start": 121,
+      "line_end": 124,
+      "parent_fqn": "phase1_scanner.FunctionCollector",
+      "name": "visit_AsyncFunctionDef"
+    },
+    {
+      "fqn": "phase1_scanner.main",
+      "type": "function",
+      "file_path": "phase1_scanner.py",
+      "line_start": 685,
+      "line_end": 773,
+      "parent_fqn": "phase1_scanner",
+      "name": "main"
+    }
+  ]
+}

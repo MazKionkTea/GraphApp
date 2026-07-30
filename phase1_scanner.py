@@ -95,7 +95,7 @@ class Phase1Scanner:
                 "type": "module",
                 "file_path": self._get_relative_path(file_path),
                 "line_start": 1,
-                "line_end": 0,
+                "line_end": tree.body[-1].end_lineno if tree.body else 1,
                 "parent_fqn": package_fqn,
                 "name": module_name,
             })
@@ -197,12 +197,26 @@ class Phase1Scanner:
             parts = list(rel_path.parts)
             pkg_fqn = self._get_fqn(parts)
             parent_pkg_fqn = self._get_fqn(parts[:-1]) if len(parts) > 1 and self._is_package(pkg_dir.parent) else None
+            
+            # Baca file __init__.py untuk mendapatkan line_end yang akurat
+            init_file = pkg_dir / "__init__.py"
+            line_end = 1
+            if init_file.exists():
+                try:
+                    with open(init_file, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    if content.strip():
+                        init_tree = ast.parse(content, filename=str(init_file))
+                        line_end = init_tree.body[-1].end_lineno if init_tree.body else 1
+                except (SyntaxError, UnicodeDecodeError):
+                    line_end = 1
+            
             self.entities.append({
                 "fqn": pkg_fqn,
                 "type": "package",
                 "file_path": str(rel_path / "__init__.py"),
                 "line_start": 1,
-                "line_end": 0,
+                "line_end": line_end,
                 "parent_fqn": parent_pkg_fqn,
                 "name": parts[-1],
             })
@@ -454,9 +468,11 @@ class Phase1Scanner:
             color = type_colors.get(typ, "#cccccc")
             dot_lines.append(f'  "{fqn}" [label="{label}", fillcolor="{color}", style="filled"];')
 
+        # Build FQN set once for efficiency
+        fqn_set = {e["fqn"] for e in self.entities}
         for ent in self.entities:
             parent = ent.get("parent_fqn")
-            if parent and parent in [e["fqn"] for e in self.entities]:
+            if parent and parent in fqn_set:
                 dot_lines.append(f'  "{parent}" -> "{ent["fqn"]}";')
 
         dot_lines.append("}")
@@ -539,11 +555,11 @@ tr:nth-child(even) {{ background-color: #f9f9f9; }}
 <tr><th>FQN</th><th>Name</th><th>Type</th><th>Parent</th><th>File</th><th>Line</th></tr>
 """
         for ent in self.entities:
-            fqn = e(ent.get("fqn", ""))
-            name = e(ent.get("name", ""))
-            typ = e(ent.get("type", ""))
-            parent = e(ent.get("parent_fqn", ""))
-            file_path = e(ent.get("file_path", ""))
+            fqn = e(ent.get("fqn") or "")
+            name = e(ent.get("name") or "")
+            typ = e(ent.get("type") or "")
+            parent = e(ent.get("parent_fqn") or "")
+            file_path = e(ent.get("file_path") or "")
             line = ent.get("line_start", "")
             row_class = typ if typ in ("package", "module", "class", "method", "function") else ""
             html += f'<tr class="{row_class}"><td>{fqn}</td><td>{name}</td><td>{typ}</td><td>{parent}</td><td>{file_path}</td><td>{line}</td></tr>'
@@ -584,11 +600,11 @@ tr:nth-child(even) {{ background-color: #f9f9f9; }}
             elif choice == "4":
                 filter_type = "class"
             elif choice == "5":
-                filter_type = "function"
+                filter_type = "method_function"
             else:
                 filter_type = None
 
-        if filter_type == "function":
+        if filter_type == "method_function":
             filtered = [e for e in self.entities if e.get("type") in ("method", "function")]
         elif filter_type:
             filtered = [e for e in self.entities if e.get("type") == filter_type]
@@ -601,7 +617,7 @@ tr:nth-child(even) {{ background-color: #f9f9f9; }}
 
         total = len(filtered)
         page = 0
-        page_size = 15
+        page_size = self.page_size
         total_pages = (total - 1) // page_size + 1 if total > 0 else 1
 
         while True:
@@ -641,8 +657,15 @@ tr:nth-child(even) {{ background-color: #f9f9f9; }}
             console.print(f"[dim]Navigasi: {nav_info}[/dim]")
             console.print(f"[dim]Total: {total} entitas[/dim]")
 
-            choice = Prompt.ask("[bold]Pilih opsi[/bold]",
-                                choices=["n", "p", "f", "0"] if page > 0 else ["n", "f", "0"])
+            # Build choices dynamically based on current page
+            choices = []
+            if page > 0:
+                choices.append("p")
+            if page < total_pages - 1:
+                choices.append("n")
+            choices.extend(["f", "0"])
+            
+            choice = Prompt.ask("[bold]Pilih opsi[/bold]", choices=choices)
 
             if choice == 'n' and page < total_pages - 1:
                 page += 1

@@ -1,0 +1,1088 @@
+{
+  "session_info": {
+    "mode": "standard",
+    "target_script": "/workspace/phase1_scanner.py",
+    "project_root": "/workspace",
+    "total_edges": 153,
+    "total_files_scanned": 7,
+    "timestamp": "2026-07-30 21:23:14"
+  },
+  "edges": [
+    {
+      "caller_fqn": "phase1_scanner",
+      "callee_fqn": "Console",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner",
+      "callee_fqn": "Path",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner",
+      "callee_fqn": "OUTPUT_DIR.mkdir",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner",
+      "callee_fqn": "d.mkdir",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._get_fqn",
+      "callee_fqn": "join",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._is_package",
+      "callee_fqn": "exists",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._get_relative_path",
+      "callee_fqn": "str",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._get_relative_path",
+      "callee_fqn": "file_path.relative_to",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "open",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "f.read",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "ast.parse",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "str",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "console.print",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "self._get_fqn",
+      "call_count": 5,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "result.append",
+      "call_count": 4,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "self._get_relative_path",
+      "call_count": 4,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.FunctionCollector.visit_ClassDef",
+      "callee_fqn": "self.generic_visit",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.FunctionCollector.visit_FunctionDef",
+      "callee_fqn": "append",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.FunctionCollector.visit_FunctionDef",
+      "callee_fqn": "self.generic_visit",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.FunctionCollector.visit_AsyncFunctionDef",
+      "callee_fqn": "append",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.FunctionCollector.visit_AsyncFunctionDef",
+      "callee_fqn": "self.generic_visit",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "FunctionCollector",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "collector.visit",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "class_defs.items",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner._parse_file",
+      "callee_fqn": "isinstance",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "resolve",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "Path",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "is_dir",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "list",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "rglob",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "console.print",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "set",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "self._is_package",
+      "call_count": 3,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "package_dirs.add",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "sorted",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "pkg_dir.relative_to",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "self._get_fqn",
+      "call_count": 2,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "len",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "append",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "str",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "Progress",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "SpinnerColumn",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "TextColumn",
+      "call_count": 2,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "BarColumn",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "progress.add_task",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "progress.update",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "file_path.relative_to",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "package_parts.append",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "self._parse_file",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "extend",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.scan_directory",
+      "callee_fqn": "progress.advance",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "console.print",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "Tree",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "ent.get",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "append",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "nodes_by_parent.get",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.add_to_tree",
+      "callee_fqn": "nodes_by_parent.get",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.add_to_tree",
+      "callee_fqn": "get",
+      "call_count": 2,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.add_to_tree",
+      "callee_fqn": "parent_tree.add",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.add_to_tree",
+      "callee_fqn": "add_to_tree",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "get",
+      "call_count": 2,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "tree.add",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "add_to_tree",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "Table",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "table.add_column",
+      "call_count": 2,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "table.add_row",
+      "call_count": 6,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_tree",
+      "callee_fqn": "str",
+      "call_count": 5,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_json",
+      "callee_fqn": "output_file.exists",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_json",
+      "callee_fqn": "Confirm.ask",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_json",
+      "callee_fqn": "console.print",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_json",
+      "callee_fqn": "str",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_json",
+      "callee_fqn": "open",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_json",
+      "callee_fqn": "json.dump",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "output_file.exists",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "Confirm.ask",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "console.print",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "ET.Element",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "root.set",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "str",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "ET.SubElement",
+      "call_count": 5,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "items",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "ent.items",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "ET.tostring",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "minidom.parseString",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "open",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "f.write",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_xml",
+      "callee_fqn": "dom.toprettyxml",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "output_file.exists",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "Confirm.ask",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "console.print",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "lines.append",
+      "call_count": 15,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "ent.get",
+      "call_count": 5,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "open",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "f.write",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_md",
+      "callee_fqn": "join",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "output_file.exists",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "Confirm.ask",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "console.print",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "type_colors.get",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "dot_lines.append",
+      "call_count": 3,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "ent.get",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "open",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "f.write",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_dot",
+      "callee_fqn": "join",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "callee_fqn": "output_file.exists",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "callee_fqn": "Confirm.ask",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "callee_fqn": "console.print",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "callee_fqn": "open",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "callee_fqn": "csv.writer",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "callee_fqn": "writer.writerow",
+      "call_count": 2,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_csv",
+      "callee_fqn": "ent.get",
+      "call_count": 7,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "output_file.exists",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "Confirm.ask",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "console.print",
+      "call_count": 3,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "e",
+      "call_count": 6,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "str",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "ent.get",
+      "call_count": 6,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "open",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.export_html",
+      "callee_fqn": "f.write",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "console.print",
+      "call_count": 12,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "Prompt.ask",
+      "call_count": 2,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "e.get",
+      "call_count": 2,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "len",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "console.clear",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "Panel.fit",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "min",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "Table",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "table.add_column",
+      "call_count": 5,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "enumerate",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "ent.get",
+      "call_count": 4,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "table.add_row",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "str",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.display_entity_table",
+      "callee_fqn": "self.display_entity_table",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.Phase1Scanner.reset",
+      "callee_fqn": "console.print",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "Phase1Scanner",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "console.print",
+      "call_count": 8,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "Panel.fit",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "Prompt.ask",
+      "call_count": 11,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "path_input.strip",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.scan_directory",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "resolve",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "Path",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "Panel",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.display_tree",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.export_json",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.export_xml",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.export_md",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.export_dot",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.export_csv",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.export_html",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.display_entity_table",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner.main",
+      "callee_fqn": "scanner.reset",
+      "call_count": 1,
+      "source_type": "project",
+      "mode": "static"
+    },
+    {
+      "caller_fqn": "phase1_scanner",
+      "callee_fqn": "main",
+      "call_count": 1,
+      "source_type": "external",
+      "mode": "static"
+    }
+  ],
+  "summary": {
+    "total_edges": 153,
+    "project_edges": 70,
+    "external_edges": 83
+  }
+}

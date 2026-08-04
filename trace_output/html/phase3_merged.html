@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Phase 3: Merge & Filter Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        .summary-box { background: #ecf0f1; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .project { color: #27ae60; }
+        .external { color: #e74c3c; }
+        code { background: #f8f9fa; padding: 2px 5px; border-radius: 3px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 Phase 3: Merge & Filter Report</h1>
+        <div class="summary-box">
+            <p><strong>Sumber Data:</strong> Standard</p>
+            <p><strong>Timestamp:</strong> 2026-07-30 21:23:14</p>
+        </div>
+
+        <h2>📊 Summary</h2>
+        <table>
+            <tr><th>Metrik</th><th>Nilai</th></tr>
+            <tr><td>Total Node</td><td>110</td></tr>
+            <tr><td>Node Project</td><td>16</td></tr>
+            <tr><td>Node Eksternal</td><td>94</td></tr>
+            <tr><td>Total Edge</td><td>153</td></tr>
+            <tr><td>Edge Project↔Project</td><td>0</td></tr>
+            <tr><td>Edge melibatkan Eksternal</td><td>153</td></tr>
+        </table>
+
+        <h2>📦 Nodes (110)</h2>
+        <table>
+            <thead>
+                <tr><th>FQN</th><th>Name</th><th>Type</th><th>Source</th><th>Parent</th><th>File</th></tr>
+            </thead>
+            <tbody>
+<tr class="external"><td><code>package_dirs.add</code></td><td>add</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>Progress</code></td><td>Progress</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.export_dot</code></td><td>export_dot</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner._get_relative_path</code></td><td>_get_relative_path</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.export_json</code></td><td>export_json</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>pkg_dir.relative_to</code></td><td>relative_to</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td>display_tree</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>f.write</code></td><td>write</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>get</code></td><td>get</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>open</code></td><td>open</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>console.print</code></td><td>print</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.export_xml</code></td><td>export_xml</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>OUTPUT_DIR.mkdir</code></td><td>mkdir</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>len</code></td><td>len</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>Tree</code></td><td>Tree</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>root.set</code></td><td>set</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>main</code></td><td>main</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>min</code></td><td>min</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>writer.writerow</code></td><td>writerow</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td>export_xml</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>csv.writer</code></td><td>writer</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>phase1_scanner.Phase1Scanner.FunctionCollector.visit_AsyncFunctionDef</code></td><td>visit_AsyncFunctionDef</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>exists</code></td><td>exists</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>Panel.fit</code></td><td>fit</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>Console</code></td><td>Console</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>items</code></td><td>items</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>self.display_entity_table</code></td><td>display_entity_table</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>table.add_row</code></td><td>add_row</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>e.get</code></td><td>get</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>dot_lines.append</code></td><td>append</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>dom.toprettyxml</code></td><td>toprettyxml</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.export_dot</code></td><td>export_dot</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>json.dump</code></td><td>dump</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>ast.parse</code></td><td>parse</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>minidom.parseString</code></td><td>parseString</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>self.generic_visit</code></td><td>generic_visit</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>progress.add_task</code></td><td>add_task</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>ET.tostring</code></td><td>tostring</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.main</code></td><td>main</td><td>function</td><td>project</td><td><code>phase1_scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>scanner.display_tree</code></td><td>display_tree</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner._get_fqn</code></td><td>_get_fqn</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>Prompt.ask</code></td><td>ask</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.export_csv</code></td><td>export_csv</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>result.append</code></td><td>append</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>join</code></td><td>join</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.scan_directory</code></td><td>scan_directory</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>set</code></td><td>set</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>isinstance</code></td><td>isinstance</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>extend</code></td><td>extend</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>is_dir</code></td><td>is_dir</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td>export_md</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>Path</code></td><td>Path</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>ET.Element</code></td><td>Element</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>self._parse_file</code></td><td>_parse_file</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>ent.get</code></td><td>get</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>Table</code></td><td>Table</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>console.clear</code></td><td>clear</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>BarColumn</code></td><td>BarColumn</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>TextColumn</code></td><td>TextColumn</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.reset</code></td><td>reset</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>output_file.exists</code></td><td>exists</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.export_json</code></td><td>export_json</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.export_csv</code></td><td>export_csv</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>d.mkdir</code></td><td>mkdir</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>phase1_scanner.Phase1Scanner.FunctionCollector.visit_FunctionDef</code></td><td>visit_FunctionDef</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td>scan_directory</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>Phase1Scanner</code></td><td>Phase1Scanner</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>list</code></td><td>list</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>progress.advance</code></td><td>advance</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>parent_tree.add</code></td><td>add</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.export_html</code></td><td>export_html</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>f.read</code></td><td>read</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>self._is_package</code></td><td>_is_package</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>Panel</code></td><td>Panel</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>tree.add</code></td><td>add</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>path_input.strip</code></td><td>strip</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>rglob</code></td><td>rglob</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>add_to_tree</code></td><td>add_to_tree</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>progress.update</code></td><td>update</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>append</code></td><td>append</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>sorted</code></td><td>sorted</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>Confirm.ask</code></td><td>ask</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.display_entity_table</code></td><td>display_entity_table</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td>_parse_file</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>FunctionCollector</code></td><td>FunctionCollector</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>ET.SubElement</code></td><td>SubElement</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>file_path.relative_to</code></td><td>relative_to</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>e</code></td><td>e</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.display_entity_table</code></td><td>display_entity_table</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>nodes_by_parent.get</code></td><td>get</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>lines.append</code></td><td>append</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>enumerate</code></td><td>enumerate</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="project"><td><code>phase1_scanner.Phase1Scanner.reset</code></td><td>reset</td><td>method</td><td>project</td><td><code>phase1_scanner.Phase1Scanner</code></td><td>phase1_scanner.py</td></tr>
+<tr class="external"><td><code>resolve</code></td><td>resolve</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>SpinnerColumn</code></td><td>SpinnerColumn</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>str</code></td><td>str</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>phase1_scanner.Phase1Scanner.add_to_tree</code></td><td>add_to_tree</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>class_defs.items</code></td><td>items</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>scanner.export_md</code></td><td>export_md</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr class="external"><td><code>self._get_fqn</code></td><td>_get_fqn</td><td>external</td><td>external</td><td><code></code></td><td></td></tr>
+<tr><td colspan="6"><em>... dan 10 node lainnya</em></td></tr>
+
+            </tbody>
+        </table>
+
+        <h2>🔗 Edges (153)</h2>
+        <table>
+            <thead>
+                <tr><th>No</th><th>Caller (FQN)</th><th>Callee (FQN)</th><th>Caller Source</th><th>Callee Source</th><th>Call Count</th></tr>
+            </thead>
+            <tbody>
+<tr class="external"><td>1</td><td><code>phase1_scanner</code></td><td><code>Console</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>2</td><td><code>phase1_scanner</code></td><td><code>Path</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>3</td><td><code>phase1_scanner</code></td><td><code>OUTPUT_DIR.mkdir</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>4</td><td><code>phase1_scanner</code></td><td><code>d.mkdir</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>5</td><td><code>phase1_scanner.Phase1Scanner._get_fqn</code></td><td><code>join</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>6</td><td><code>phase1_scanner.Phase1Scanner._is_package</code></td><td><code>exists</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>7</td><td><code>phase1_scanner.Phase1Scanner._get_relative_path</code></td><td><code>str</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>8</td><td><code>phase1_scanner.Phase1Scanner._get_relative_path</code></td><td><code>file_path.relative_to</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>9</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>open</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>10</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>f.read</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>11</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>ast.parse</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>12</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>str</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>13</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>console.print</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>14</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>self._get_fqn</code></td><td>project</td><td>external</td><td>5</td></tr>
+<tr class="external"><td>15</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>result.append</code></td><td>project</td><td>external</td><td>4</td></tr>
+<tr class="external"><td>16</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>self._get_relative_path</code></td><td>project</td><td>external</td><td>4</td></tr>
+<tr class="external"><td>17</td><td><code>phase1_scanner.Phase1Scanner.FunctionCollector.visit_ClassDef</code></td><td><code>self.generic_visit</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>18</td><td><code>phase1_scanner.Phase1Scanner.FunctionCollector.visit_FunctionDef</code></td><td><code>append</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>19</td><td><code>phase1_scanner.Phase1Scanner.FunctionCollector.visit_FunctionDef</code></td><td><code>self.generic_visit</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>20</td><td><code>phase1_scanner.Phase1Scanner.FunctionCollector.visit_AsyncFunctionDef</code></td><td><code>append</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>21</td><td><code>phase1_scanner.Phase1Scanner.FunctionCollector.visit_AsyncFunctionDef</code></td><td><code>self.generic_visit</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>22</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>FunctionCollector</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>23</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>collector.visit</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>24</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>class_defs.items</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>25</td><td><code>phase1_scanner.Phase1Scanner._parse_file</code></td><td><code>isinstance</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>26</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>resolve</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>27</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>Path</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>28</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>is_dir</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>29</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>list</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>30</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>rglob</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>31</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>console.print</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>32</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>set</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>33</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>self._is_package</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>34</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>package_dirs.add</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>35</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>sorted</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>36</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>pkg_dir.relative_to</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>37</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>self._get_fqn</code></td><td>project</td><td>external</td><td>2</td></tr>
+<tr class="external"><td>38</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>len</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>39</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>append</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>40</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>str</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>41</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>Progress</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>42</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>SpinnerColumn</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>43</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>TextColumn</code></td><td>project</td><td>external</td><td>2</td></tr>
+<tr class="external"><td>44</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>BarColumn</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>45</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>progress.add_task</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>46</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>progress.update</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>47</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>file_path.relative_to</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>48</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>package_parts.append</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>49</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>self._parse_file</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>50</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>extend</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>51</td><td><code>phase1_scanner.Phase1Scanner.scan_directory</code></td><td><code>progress.advance</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>52</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>console.print</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>53</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>Tree</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>54</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>ent.get</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>55</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>append</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>56</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>nodes_by_parent.get</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>57</td><td><code>phase1_scanner.Phase1Scanner.add_to_tree</code></td><td><code>nodes_by_parent.get</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>58</td><td><code>phase1_scanner.Phase1Scanner.add_to_tree</code></td><td><code>get</code></td><td>external</td><td>external</td><td>2</td></tr>
+<tr class="external"><td>59</td><td><code>phase1_scanner.Phase1Scanner.add_to_tree</code></td><td><code>parent_tree.add</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>60</td><td><code>phase1_scanner.Phase1Scanner.add_to_tree</code></td><td><code>add_to_tree</code></td><td>external</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>61</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>get</code></td><td>project</td><td>external</td><td>2</td></tr>
+<tr class="external"><td>62</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>tree.add</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>63</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>add_to_tree</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>64</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>Table</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>65</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>table.add_column</code></td><td>project</td><td>external</td><td>2</td></tr>
+<tr class="external"><td>66</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>table.add_row</code></td><td>project</td><td>external</td><td>6</td></tr>
+<tr class="external"><td>67</td><td><code>phase1_scanner.Phase1Scanner.display_tree</code></td><td><code>str</code></td><td>project</td><td>external</td><td>5</td></tr>
+<tr class="external"><td>68</td><td><code>phase1_scanner.Phase1Scanner.export_json</code></td><td><code>output_file.exists</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>69</td><td><code>phase1_scanner.Phase1Scanner.export_json</code></td><td><code>Confirm.ask</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>70</td><td><code>phase1_scanner.Phase1Scanner.export_json</code></td><td><code>console.print</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>71</td><td><code>phase1_scanner.Phase1Scanner.export_json</code></td><td><code>str</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>72</td><td><code>phase1_scanner.Phase1Scanner.export_json</code></td><td><code>open</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>73</td><td><code>phase1_scanner.Phase1Scanner.export_json</code></td><td><code>json.dump</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>74</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>output_file.exists</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>75</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>Confirm.ask</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>76</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>console.print</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>77</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>ET.Element</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>78</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>root.set</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>79</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>str</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>80</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>ET.SubElement</code></td><td>project</td><td>external</td><td>5</td></tr>
+<tr class="external"><td>81</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>items</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>82</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>ent.items</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>83</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>ET.tostring</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>84</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>minidom.parseString</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>85</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>open</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>86</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>f.write</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>87</td><td><code>phase1_scanner.Phase1Scanner.export_xml</code></td><td><code>dom.toprettyxml</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>88</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>output_file.exists</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>89</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>Confirm.ask</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>90</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>console.print</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>91</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>lines.append</code></td><td>project</td><td>external</td><td>15</td></tr>
+<tr class="external"><td>92</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>ent.get</code></td><td>project</td><td>external</td><td>5</td></tr>
+<tr class="external"><td>93</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>open</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>94</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>f.write</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>95</td><td><code>phase1_scanner.Phase1Scanner.export_md</code></td><td><code>join</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>96</td><td><code>phase1_scanner.Phase1Scanner.export_dot</code></td><td><code>output_file.exists</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>97</td><td><code>phase1_scanner.Phase1Scanner.export_dot</code></td><td><code>Confirm.ask</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>98</td><td><code>phase1_scanner.Phase1Scanner.export_dot</code></td><td><code>console.print</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr class="external"><td>99</td><td><code>phase1_scanner.Phase1Scanner.export_dot</code></td><td><code>type_colors.get</code></td><td>project</td><td>external</td><td>1</td></tr>
+<tr class="external"><td>100</td><td><code>phase1_scanner.Phase1Scanner.export_dot</code></td><td><code>dot_lines.append</code></td><td>project</td><td>external</td><td>3</td></tr>
+<tr><td colspan="6"><em>... dan 53 edge lainnya</em></td></tr>
+
+            </tbody>
+        </table>
+        <p><em>Generated by Phase 3 Merger</em></p>
+    </div>
+</body>
+</html>

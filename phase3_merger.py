@@ -10,6 +10,7 @@ import json
 import sys
 import csv
 import time
+import html as html_lib
 import traceback
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
@@ -33,7 +34,8 @@ XML_DIR = OUTPUT_DIR / "xml"
 DOT_DIR = OUTPUT_DIR / "dot"
 MD_DIR = OUTPUT_DIR / "md"
 CSV_DIR = OUTPUT_DIR / "csv"
-for d in [JSON_DIR, XML_DIR, DOT_DIR, MD_DIR, CSV_DIR]:
+HTML_DIR = OUTPUT_DIR / "html"
+for d in [JSON_DIR, XML_DIR, DOT_DIR, MD_DIR, CSV_DIR, HTML_DIR]:
     d.mkdir(exist_ok=True)
 
 # ===== FILE INPUT =====
@@ -130,7 +132,7 @@ class Phase3Merger:
 
     # ==================== PROSES ====================
 
-    def process(self):
+    def process(self, interactive: bool = True):
         """Proses utama: merge dan filter, lalu tampilkan menu pasca-merge."""
         console.print("\n[bold cyan]▶️  Memulai proses merge & filter...[/bold cyan]")
 
@@ -275,7 +277,7 @@ class Phase3Merger:
 
             console.print("[green]✅ Proses merge & filter selesai![/green]")
             self._display_summary()
-            self._show_post_merge_menu()
+            if interactive: self._show_post_merge_menu()
 
         except Exception as e:
             console.print(f"[red]❌ Error saat proses: {e}[/red]")
@@ -283,7 +285,7 @@ class Phase3Merger:
             console.print("[yellow]Silakan perbaiki error di atas, lalu ulangi proses.[/yellow]")
             if self.last_merge_result:
                 console.print("[dim]Data sebagian sudah tersedia, mencoba menampilkan menu...[/dim]")
-                self._show_post_merge_menu()
+                if interactive: self._show_post_merge_menu()
 
     # ==================== MENU PASCA-MERGE ====================
 
@@ -312,12 +314,13 @@ class Phase3Merger:
                 console.print(f"[3] Ekspor DOT -> [yellow]{DOT_DIR / 'phase3_merged.dot'}[/yellow]")
                 console.print(f"[4] Ekspor Markdown -> [yellow]{MD_DIR / 'phase3_merged.md'}[/yellow]")
                 console.print(f"[5] Ekspor CSV -> [yellow]{CSV_DIR / 'phase3_merged.csv'}[/yellow]")
-                console.print("[6] Tampilkan ringkasan (ulang)")
-                console.print("[7] Tampilkan daftar edge (relasi panggilan)")  # OPSI BARU
+                console.print(f"[6] Ekspor HTML -> [yellow]{HTML_DIR / 'phase3_merged.html'}[/yellow]")
+                console.print("[7] Tampilkan ringkasan (ulang)")
+                console.print("[8] Tampilkan daftar edge (relasi panggilan)")
                 console.print("[0] Kembali ke menu utama Fase 3")
                 console.print("[x] Keluar")
 
-                choice = Prompt.ask("[bold]Pilih opsi[/bold]", choices=["1", "2", "3", "4", "5", "6", "7", "0", "x"])
+                choice = Prompt.ask("[bold]Pilih opsi[/bold]", choices=["1", "2", "3", "4", "5", "6", "7", "8", "0", "x"])
 
                 if choice == "1":
                     self._export_json()
@@ -335,9 +338,12 @@ class Phase3Merger:
                     self._export_csv()
                     Prompt.ask("[dim]Tekan Enter untuk melanjutkan[/dim]", default="")
                 elif choice == "6":
-                    self._display_summary()
+                    self._export_html()
                     Prompt.ask("[dim]Tekan Enter untuk melanjutkan[/dim]", default="")
                 elif choice == "7":
+                    self._display_summary()
+                    Prompt.ask("[dim]Tekan Enter untuk melanjutkan[/dim]", default="")
+                elif choice == "8":
                     self._display_edge_list()
                     Prompt.ask("[dim]Tekan Enter untuk melanjutkan[/dim]", default="")
                 elif choice == "0":
@@ -645,6 +651,115 @@ class Phase3Merger:
             console.print(f"[green]✅ CSV berhasil diekspor ke {output_file}[/green]")
         except Exception as e:
             console.print(f"[red]❌ Gagal ekspor CSV: {e}[/red]")
+
+    def _export_html(self):
+        try:
+            if not self.last_node_list or not self.last_edge_list:
+                console.print("[yellow]⚠️  Tidak ada data untuk diekspor.[/yellow]")
+                return
+
+            output_file = HTML_DIR / "phase3_merged.html"
+            if output_file.exists() and not Confirm.ask(f"[yellow]⚠️  File {output_file} sudah ada. Timpa?[/yellow]", default=True):
+                return
+
+            e = html_lib.escape
+            summary = self.last_merge_summary or {}
+
+            html_content = f"""<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Phase 3: Merge & Filter Report</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }}
+        .container {{ max-width: 1200px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
+        h1, h2 {{ color: #2c3e50; }}
+        .summary-box {{ background: #ecf0f1; padding: 15px; border-radius: 5px; margin-bottom: 20px; }}
+        table {{ border-collapse: collapse; width: 100%; margin-top: 10px; }}
+        th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+        th {{ background-color: #3498db; color: white; }}
+        tr:nth-child(even) {{ background-color: #f9f9f9; }}
+        .project {{ color: #27ae60; }}
+        .external {{ color: #e74c3c; }}
+        code {{ background: #f8f9fa; padding: 2px 5px; border-radius: 3px; font-family: monospace; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 Phase 3: Merge & Filter Report</h1>
+        <div class="summary-box">
+            <p><strong>Sumber Data:</strong> {e(self.source_type or 'unknown').capitalize()}</p>
+            <p><strong>Timestamp:</strong> {time.strftime('%Y-%m-%d %H:%M:%S')}</p>
+        </div>
+
+        <h2>📊 Summary</h2>
+        <table>
+            <tr><th>Metrik</th><th>Nilai</th></tr>
+            <tr><td>Total Node</td><td>{summary.get('total_nodes', 0)}</td></tr>
+            <tr><td>Node Project</td><td>{summary.get('project_nodes', 0)}</td></tr>
+            <tr><td>Node Eksternal</td><td>{summary.get('external_nodes', 0)}</td></tr>
+            <tr><td>Total Edge</td><td>{summary.get('total_edges', 0)}</td></tr>
+            <tr><td>Edge Project↔Project</td><td>{summary.get('project_edges', 0)}</td></tr>
+            <tr><td>Edge melibatkan Eksternal</td><td>{summary.get('external_edges', 0)}</td></tr>
+        </table>
+
+        <h2>📦 Nodes ({len(self.last_node_list)})</h2>
+        <table>
+            <thead>
+                <tr><th>FQN</th><th>Name</th><th>Type</th><th>Source</th><th>Parent</th><th>File</th></tr>
+            </thead>
+            <tbody>
+"""
+            for node in self.last_node_list[:100]:  # Batasi 100 node pertama
+                fqn = e(node.get("fqn", ""))
+                name = e(node.get("name", ""))
+                typ = e(node.get("type", ""))
+                source = e(node.get("source_type", ""))
+                parent = e(node.get("parent_fqn", "") or "")
+                file_path = e(node.get("file_path", "") or "")
+                css_class = "project" if source == "project" else "external"
+                html_content += f'<tr class="{css_class}"><td><code>{fqn}</code></td><td>{name}</td><td>{typ}</td><td>{source}</td><td><code>{parent}</code></td><td>{file_path}</td></tr>\n'
+
+            if len(self.last_node_list) > 100:
+                html_content += f'<tr><td colspan="6"><em>... dan {len(self.last_node_list) - 100} node lainnya</em></td></tr>\n'
+
+            html_content += """
+            </tbody>
+        </table>
+
+        <h2>🔗 Edges (""" + str(len(self.last_edge_list)) + """)</h2>
+        <table>
+            <thead>
+                <tr><th>No</th><th>Caller (FQN)</th><th>Callee (FQN)</th><th>Caller Source</th><th>Callee Source</th><th>Call Count</th></tr>
+            </thead>
+            <tbody>
+"""
+            for idx, edge in enumerate(self.last_edge_list[:100], 1):  # Batasi 100 edge pertama
+                caller = e(edge.get("caller_fqn", ""))
+                callee = e(edge.get("callee_fqn", ""))
+                caller_src = e(edge.get("caller_source", ""))
+                callee_src = e(edge.get("callee_source", ""))
+                count = edge.get("call_count", 0)
+                css_class = "project" if caller_src == "project" and callee_src == "project" else "external"
+                html_content += f'<tr class="{css_class}"><td>{idx}</td><td><code>{caller}</code></td><td><code>{callee}</code></td><td>{caller_src}</td><td>{callee_src}</td><td>{count}</td></tr>\n'
+
+            if len(self.last_edge_list) > 100:
+                html_content += f'<tr><td colspan="6"><em>... dan {len(self.last_edge_list) - 100} edge lainnya</em></td></tr>\n'
+
+            html_content += """
+            </tbody>
+        </table>
+        <p><em>Generated by Phase 3 Merger</em></p>
+    </div>
+</body>
+</html>"""
+
+            with open(output_file, "w", encoding="utf-8") as f:
+                f.write(html_content)
+
+            console.print(f"[green]✅ HTML berhasil diekspor ke {output_file}[/green]")
+        except Exception as e:
+            console.print(f"[red]❌ Gagal ekspor HTML: {e}[/red]")
 
     # ==================== DISPLAY SUMMARY ====================
 

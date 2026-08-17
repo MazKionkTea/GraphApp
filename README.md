@@ -969,39 +969,118 @@ Klik → switch mode. State: `useAppStore.mode`
 - **Python** 3.11+ (`python --version`)
 - **npm** atau **pnpm** (`npm --version`)
 - **Git**
+- **Rust toolchain** + C/C++ compiler (hanya kalau `pydantic-core` gagal build dari source — biasanya sudah ada pre-built wheel)
 
-### Installation
+### Quick Start
 
 ```bash
-# Clone (atau nanti dari local)
-cd /path/to/graph-app
+./start.sh          # start backend + frontend
+./status.sh         # cek status
+./stop.sh           # stop
+```
 
+URL: **http://127.0.0.1:5173** (frontend) · **http://127.0.0.1:8765** (backend)
+
+### Manual Setup (kalau `start.sh` gagal)
+
+```bash
 # Backend
 cd server
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip wheel
 pip install -r requirements.txt
-
-# Initialize database
-python -m app.db.init
+cd .. && python scripts/init_db.py
 
 # Frontend
-cd ../client
+cd client
 npm install
 ```
 
-### Development (Run Both)
+### Jalankan Manual (debugging)
 
 ```bash
-# Dari root graph-app/
-./start.sh
+# Terminal 1 — backend
+cd server && source venv/bin/activate
+uvicorn app.main:app --reload --port 8765
+
+# Terminal 2 — frontend
+cd client
+npm run dev
 ```
 
-`start.sh` akan:
-1. Activate Python venv (kalau ada)
-2. Start backend di port 8765 (background, log ke `data/logs/backend.log`)
-3. Start frontend di port 5173 (background, log ke `data/logs/frontend.log`)
-4. Print status
+### Reset Database
+
+```bash
+rm -f data/app.db
+python scripts/init_db.py
+```
+
+### 🩹 Troubleshooting
+
+#### ❌ `Failed to build installable wheels for pydantic-core`
+
+`pydantic-core` butuh Rust untuk compile dari source. Biasanya pre-built wheel udah ada, tapi kalau gagal:
+
+**Fix 1 — Install Rust toolchain:**
+```bash
+./install_deps.sh       # auto-detect distro (Arch/Debian/Fedora/openSUSE)
+# atau manual:
+# Arch:    sudo pacman -S base-devel rust
+# Ubuntu:  sudo apt install build-essential rustc cargo
+# Fedora:  sudo dnf install gcc gcc-c++ rust cargo
+```
+
+**Fix 2 — Force wheel (no compile):**
+```bash
+./venv/bin/pip install --only-binary=:all: -r requirements.txt
+```
+
+**Fix 3 — Upgrade pip dulu:**
+```bash
+./venv/bin/pip install --upgrade pip wheel
+```
+
+#### ❌ App berhenti sendiri setelah tutup terminal
+
+`start.sh` pakai `setsid` untuk detach beneran. Kalau masih mati:
+
+1. Cek pakai `status.sh` — masih running atau engga
+2. Cek log: `tail -f data/logs/backend.log`
+3. Pastikan `data/pids/*.pid` ada
+4. Jangan close terminal dengan Ctrl+C — pakai `./stop.sh` atau biarkan terminal terbuka
+
+#### ❌ `Port already in use`
+
+```bash
+# Cari proses yang pakai port
+sudo ss -tlnp | grep 8765      # backend
+sudo ss -tlnp | grep 5173      # frontend
+# Kill manual
+sudo kill <PID>
+# Atau langsung
+sudo kill $(sudo lsof -t -i:8765)    # backend
+sudo kill $(sudo lsof -t -i:5173)    # frontend
+```
+
+#### ❌ `node-gyp` atau build error di npm install
+
+Biasanya karena versi Node terlalu lama atau build tool missing.
+
+```bash
+node --version    # harus 20+
+# Arch:    sudo pacman -S nodejs npm gcc
+# Ubuntu:  sudo apt install nodejs npm build-essential
+```
+
+#### ❌ `data/app.db` corrupt / locked
+
+```bash
+./stop.sh
+rm -f data/app.db data/pids/*.pid
+python scripts/init_db.py
+./start.sh
+```
 
 ### Akses
 
@@ -1009,33 +1088,6 @@ npm install
 - **Backend API**: http://localhost:8765
 - **API Docs (Swagger)**: http://localhost:8765/docs
 - **API Docs (ReDoc)**: http://localhost:8765/redoc
-
-### Stop
-
-```bash
-./stop.sh
-```
-
-### Reset Database
-
-```bash
-# Dari root
-rm data/app.db
-cd server && python -m app.db.init && cd ..
-```
-
-### Development Workflow
-
-```bash
-# Backend (auto-reload)
-cd server
-source venv/bin/activate
-uvicorn app.main:app --reload --port 8765
-
-# Frontend (HMR)
-cd client
-npm run dev
-```
 
 ### Build (Production)
 
@@ -1048,22 +1100,6 @@ npm run build
 # Backend (gak perlu build, langsung run)
 cd ../server
 uvicorn app.main:app --host 0.0.0.0 --port 8765
-```
-
-### Project Commands
-
-```bash
-# Lint
-cd client && npm run lint
-cd server && ruff check .
-
-# Format
-cd client && npm run format
-cd server && black .
-
-# Test (akan ditambah)
-cd client && npm run test
-cd server && pytest
 ```
 
 ---

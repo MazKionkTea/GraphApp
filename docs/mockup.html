@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Graph Visualizer — Python Code Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-base: #0d1117;
+    --bg-panel: #161b22;
+    --bg-elevated: #1c2128;
+    --bg-hover: #22272e;
+    --bg-active: #2d333b;
+    --border: #30363d;
+    --border-soft: #21262d;
+    --text-primary: #e6edf3;
+    --text-secondary: #9da7b3;
+    --text-muted: #6e7681;
+    --accent: #58a6ff;
+    --accent-soft: rgba(88,166,255,0.12);
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #db6d28;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --cyan: #39c5cf;
+    --type-package: #3fb950;
+    --type-module: #58a6ff;
+    --type-class: #d29922;
+    --type-function: #39c5cf;
+    --type-method: #bc8cff;
+    --type-external: #6e7681;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Outfit', system-ui, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 1.5;
+    overflow: hidden;
+  }
+  button { font-family: inherit; cursor: pointer; background: transparent; border: 0; color: inherit; }
+  input { font-family: inherit; }
+
+  /* ========== APP LAYOUT ========== */
+  .app { display: grid; grid-template-rows: 44px 1fr 26px; height: 100vh; }
+
+  /* ========== TOP BAR ========== */
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr 480px 1fr;
+    align-items: center;
+    padding: 0 16px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  .brand-logo {
+    width: 24px; height: 24px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    display: grid; place-items: center; color: white;
+  }
+  .brand-text { font-size: 13px; letter-spacing: -0.01em; }
+  .brand-text small { color: var(--text-muted); font-weight: 400; margin-left: 6px; }
+
+  .search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0 10px;
+    height: 28px;
+    transition: border-color 0.15s;
+  }
+  .search:focus-within { border-color: var(--accent); }
+  .search-icon { color: var(--text-muted); flex-shrink: 0; }
+  .search input {
+    flex: 1; background: transparent; border: 0; outline: 0;
+    color: var(--text-primary); font-size: 12.5px;
+  }
+  .search input::placeholder { color: var(--text-muted); }
+  .search kbd {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1px 5px; color: var(--text-muted);
+  }
+
+  .topbar-actions { display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px; border-radius: 6px;
+    color: var(--text-secondary); font-size: 12px; font-weight: 500;
+    transition: background 0.12s, color 0.12s;
+  }
+  .btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+  .btn-primary {
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .btn-primary:hover { background: rgba(88,166,255,0.2); }
+
+  /* ========== MAIN GRID ========== */
+  .main {
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    overflow: hidden;
+  }
+  .panel {
+    background: var(--bg-panel);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .panel + .panel { border-left: 1px solid var(--border); }
+
+  .panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .panel-header .left { display: flex; align-items: center; gap: 6px; }
+  .panel-body { flex: 1; overflow: auto; }
+
+  /* ========== NAVIGATOR (LEFT) ========== */
+  .nav-actions { display: flex; gap: 4px; }
+  .icon-btn {
+    width: 22px; height: 22px; display: grid; place-items: center;
+    border-radius: 4px; color: var(--text-muted);
+  }
+  .icon-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+  .tree { padding: 6px 0; }
+  .tree-node {
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 14px;
+    cursor: pointer;
+    font-size: 12.5px;
+    user-select: none;
+    border-left: 2px solid transparent;
+  }
+  .tree-node:hover { background: var(--bg-hover); }
+  .tree-node.selected {
+    background: var(--accent-soft);
+    border-left-color: var(--accent);
+    color: var(--text-primary);
+  }
+  .tree-node .icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--text-muted); }
+  .tree-node.package .icon { color: var(--type-package); }
+  .tree-node.module .icon { color: var(--type-module); }
+  .tree-node.class .icon { color: var(--type-class); }
+  .tree-node.function .icon { color: var(--type-function); }
+  .tree-node.method .icon { color: var(--type-method); }
+  .tree-node .label { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tree-node .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-muted);
+    background: var(--bg-elevated);
+    border-radius: 3px; padding: 1px 5px;
+  }
+  .tree-children { padding-left: 0; }
+  .tree-children.collapsed { display: none; }
+  .tree-caret { width: 14px; height: 14px; transition: transform 0.15s; }
+  .tree-caret.open { transform: rotate(90deg); }
+
+  .filter-bar {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 8px; border-radius: 12px;
+    font-size: 11px; font-weight: 500;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-soft);
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .chip:hover { background: var(--bg-hover); }
+  .chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+  .chip .dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  /* ========== CANVAS (CENTER) ========== */
+  .canvas {
+    position: relative;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(88,166,255,0.04) 0%, transparent 70%),
+      var(--bg-base);
+    overflow: hidden;
+  }
+  .canvas-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(48,54,61,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48,54,61,0.3) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .canvas-toolbar {
+    position: absolute; top: 12px; left: 12px;
+    display: flex; gap: 4px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+    z-index: 10;
+  }
+  .tool-btn {
+    width: 28px; height: 28px;
+    display: grid; place-items: center;
+    border-radius: 5px;
+    color: var(--text-secondary);
+    transition: all 0.12s;
+  }
+  .tool-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+  .tool-btn.active { background: var(--accent-soft); color: var(--accent); }
+
+  .canvas-toolbar-right {
+    position: absolute; top: 12px; right: 12px;
+    display: flex; gap: 6px; align-items: center;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 6px;
+    z-index: 10;
+  }
+  .view-tabs { display: flex; gap: 2px; }
+  .view-tab {
+    padding: 4px 10px; border-radius: 4px;
+    font-size: 11px; font-weight: 500;
+    color: var(--text-secondary);
+  }
+  .view-tab.active { background: var(--bg-hover); color: var(--text-primary); }
+  .view-tab:hover:not(.active) { color: var(--text-primary); }
+
+  .canvas-legend {
+    position: absolute; bottom: 12px; left: 12px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex; gap: 14px;
+    font-size: 11px;
+    z-index: 10;
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; color: var(--text-secondary); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  .zoom-controls {
+    position: absolute; bottom: 12px; right: 12px;
+    display: flex; flex-direction: column; gap: 2px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+    z-index: 10;
+  }
+
+  /* ========== GRAPH NODES (SVG) ========== */
+  .graph-svg { width: 100%; height: 100%; cursor: grab; }
+  .graph-svg:active { cursor: grabbing; }
+
+  .node-rect {
+    fill: var(--bg-elevated);
+    stroke: var(--border);
+    stroke-width: 1.5;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .node-group:hover .node-rect { fill: var(--bg-hover); stroke-width: 2; }
+  .node-group.selected .node-rect { fill: var(--bg-active); stroke: var(--accent); stroke-width: 2; }
+  .node-group.selected.dimmed .node-rect { opacity: 0.3; }
+  .node-group.dimmed .node-rect { opacity: 0.2; }
+  .node-group.dimmed .node-text { opacity: 0.2; }
+  .node-group.dimmed .node-sub { opacity: 0.2; }
+  .node-group.highlighted .node-rect { stroke: var(--accent); stroke-width: 2.5; }
+
+  .node-text {
+    fill: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    pointer-events: none;
+  }
+  .node-sub {
+    fill: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    pointer-events: none;
+  }
+
+  .node-icon-dot {
+    /* small colored dot per type */
+  }
+  .edge {
+    fill: none;
+    stroke: var(--text-muted);
+    stroke-width: 1.5;
+    opacity: 0.4;
+    transition: all 0.15s;
+  }
+  .edge.highlighted { stroke: var(--accent); stroke-width: 2; opacity: 1; }
+  .edge.dimmed { opacity: 0.08; }
+
+  /* ========== PROPERTIES (RIGHT) ========== */
+  .prop-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-elevated);
+  }
+  .prop-breadcrumb {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 11px; color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 8px;
+  }
+  .prop-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 15px; font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .prop-title .type-badge {
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 7px; border-radius: 4px;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .prop-meta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    font-size: 11px; color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .prop-meta a { color: var(--accent); text-decoration: none; }
+  .prop-meta a:hover { text-decoration: underline; }
+
+  .prop-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-soft);
+    flex-shrink: 0;
+  }
+  .prop-tab {
+    padding: 8px 14px;
+    font-size: 11.5px; font-weight: 500;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    transition: all 0.12s;
+  }
+  .prop-tab:hover { color: var(--text-secondary); }
+  .prop-tab.active { color: var(--text-primary); border-bottom-color: var(--accent); }
+
+  .prop-section { padding: 12px 16px; border-bottom: 1px solid var(--border-soft); }
+  .prop-section h4 {
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .kv-row {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 12px; padding: 4px 0;
+    font-size: 12px;
+  }
+  .kv-row .k { color: var(--text-muted); }
+  .kv-row .v { color: var(--text-primary); font-family: 'JetBrains Mono', monospace; word-break: break-all; }
+  .kv-row .v.muted { color: var(--text-muted); }
+
+  .ref-list { display: flex; flex-direction: column; gap: 2px; }
+  .ref-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 8px; border-radius: 4px;
+    font-size: 12px; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: background 0.12s;
+  }
+  .ref-item:hover { background: var(--bg-hover); }
+  .ref-item .arrow { color: var(--text-muted); }
+  .ref-item .name { color: var(--text-primary); }
+  .ref-item .line { color: var(--text-muted); font-size: 10.5px; margin-left: auto; }
+
+  .metrics-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .metric-card {
+    background: var(--bg-base);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 8px 10px;
+  }
+  .metric-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px; font-weight: 600;
+    line-height: 1.2;
+  }
+  .metric-card .num.complex { color: var(--red); }
+  .metric-card .num.warn { color: var(--yellow); }
+  .metric-card .num.good { color: var(--green); }
+  .metric-card .lbl {
+    font-size: 10px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  .source-code {
+    background: var(--bg-base);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    overflow-x: auto;
+  }
+  .source-code .line-num {
+    color: var(--text-muted);
+    display: inline-block; width: 24px; text-align: right;
+    margin-right: 12px; user-select: none;
+  }
+  .source-code .kw { color: var(--purple); }
+  .source-code .fn { color: var(--accent); }
+  .source-code .str { color: var(--green); }
+  .source-code .num { color: var(--orange); }
+
+  /* ========== STATUS BAR (BOTTOM) ========== */
+  .statusbar {
+    display: flex; align-items: center;
+    padding: 0 16px;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    gap: 16px;
+  }
+  .status-item { display: flex; align-items: center; gap: 5px; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  .status-spacer { flex: 1; }
+
+  /* ========== MINI GRAPH (in call hierarchy) ========== */
+  .mini-graph {
+    background: var(--bg-base);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 8px;
+  }
+  .mini-node {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 8px; border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    margin: 3px;
+    cursor: pointer;
+  }
+  .mini-node:hover { background: var(--bg-hover); border-color: var(--accent); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+  /* Animations */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .live-indicator {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M6 8.5v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3"/><path d="M12 13.5V15.5"/></svg>
+      </div>
+      <div class="brand-text">Graph Visualizer <small>v0.1 · Python</small></div>
+    </div>
+
+    <div class="search">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Search functions, classes, modules… (try: authenticate, find_user)" value="authenticate" />
+      <kbd>⌘</kbd><kbd>K</kbd>
+    </div>
+
+    <div class="topbar-actions">
+      <button class="btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Import
+      </button>
+      <button class="btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Export
+      </button>
+      <button class="btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN GRID ===== -->
+  <main class="main">
+
+    <!-- ===== NAVIGATOR (LEFT) ===== -->
+    <aside class="panel">
+      <div class="panel-header">
+        <div class="left">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+          Navigator
+        </div>
+        <div class="nav-actions">
+          <button class="icon-btn" title="Collapse all">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <button class="icon-btn" title="Refresh">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <span class="chip active"><span class="dot" style="background: var(--type-package)"></span>Pkg</span>
+        <span class="chip active"><span class="dot" style="background: var(--type-module)"></span>Mod</span>
+        <span class="chip active"><span class="dot" style="background: var(--type-class)"></span>Cls</span>
+        <span class="chip active"><span class="dot" style="background: var(--type-function)"></span>Fn</span>
+        <span class="chip active"><span class="dot" style="background: var(--type-method)"></span>Mth</span>
+      </div>
+
+      <div class="panel-body">
+        <div class="tree" id="tree"></div>
+      </div>
+    </aside>
+
+    <!-- ===== CANVAS (CENTER) ===== -->
+    <section class="panel canvas">
+      <div class="canvas-grid"></div>
+
+      <div class="canvas-toolbar">
+        <button class="tool-btn active" title="Select (V)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>
+        </button>
+        <button class="tool-btn" title="Pan (H)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+        </button>
+        <button class="tool-btn" title="Zoom in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </button>
+        <button class="tool-btn" title="Fit view">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
+        </button>
+        <button class="tool-btn" title="Auto-layout">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+      </div>
+
+      <div class="canvas-toolbar-right">
+        <div class="view-tabs">
+          <button class="view-tab active">Full Graph</button>
+          <button class="view-tab">Subgraph</button>
+          <button class="view-tab">Call Hierarchy</button>
+          <button class="view-tab">Dependencies</button>
+        </div>
+      </div>
+
+      <svg class="graph-svg" id="graph" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet">
+        <!-- Edges -->
+        <g id="edges"></g>
+        <!-- Nodes -->
+        <g id="nodes"></g>
+      </svg>
+
+      <div class="canvas-legend">
+        <div class="legend-item"><span class="legend-dot" style="background: var(--type-package)"></span>Package</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--type-module)"></span>Module</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--type-class)"></span>Class</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--type-function)"></span>Function</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--type-method)"></span>Method</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--type-external)"></span>External</div>
+      </div>
+
+      <div class="zoom-controls">
+        <button class="tool-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <button class="tool-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ===== PROPERTIES (RIGHT) ===== -->
+    <aside class="panel">
+      <div class="panel-header">
+        <div class="left">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6m11-11h-6m-10 0H1"/></svg>
+          Properties
+        </div>
+        <button class="icon-btn" title="Open in editor">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </button>
+      </div>
+
+      <div class="prop-header">
+        <div class="prop-breadcrumb">app.auth.services</div>
+        <div class="prop-title">
+          <span class="type-badge">function</span>
+          <span>authenticate</span>
+        </div>
+        <div class="prop-meta">
+          <span>📄 services.py</span>
+          <span>·</span>
+          <span>line <a>15</a></span>
+        </div>
+      </div>
+
+      <div class="prop-tabs">
+        <button class="prop-tab active">Info</button>
+        <button class="prop-tab">Callers <span style="color: var(--text-muted)">· 2</span></button>
+        <button class="prop-tab">Callees <span style="color: var(--text-muted)">· 3</span></button>
+        <button class="prop-tab">Source</button>
+        <button class="prop-tab">Metrics</button>
+      </div>
+
+      <div class="panel-body">
+        <div class="prop-section">
+          <h4>Identification</h4>
+          <div class="kv-row"><span class="k">FQN</span><span class="v">app.auth.services.authenticate</span></div>
+          <div class="kv-row"><span class="k">Type</span><span class="v">function</span></div>
+          <div class="kv-row"><span class="k">Parent</span><span class="v">app.auth.services</span></div>
+        </div>
+
+        <div class="prop-section">
+          <h4>Source</h4>
+          <div class="kv-row"><span class="k">File</span><span class="v">app/auth/services.py</span></div>
+          <div class="kv-row"><span class="k">Lines</span><span class="v">15 – 42</span></div>
+          <div class="kv-row"><span class="k">Module</span><span class="v">app.auth.services</span></div>
+        </div>
+
+        <div class="prop-section">
+          <h4>Callers (2)</h4>
+          <div class="ref-list">
+            <div class="ref-item">
+              <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              <span class="name">app.auth.views.LoginView.post</span>
+              <span class="line">L24</span>
+            </div>
+            <div class="ref-item">
+              <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              <span class="name">app.main</span>
+              <span class="line">L31</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prop-section">
+          <h4>Callees (3)</h4>
+          <div class="ref-list">
+            <div class="ref-item">
+              <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              <span class="name">app.database.queries.find_user</span>
+              <span class="line">L21</span>
+            </div>
+            <div class="ref-item">
+              <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              <span class="name">app.utils.crypto.verify_password</span>
+              <span class="line">L29</span>
+            </div>
+            <div class="ref-item">
+              <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              <span class="name">logger.info</span>
+              <span class="line" style="color: var(--text-muted)">ext</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prop-section">
+          <h4>Quick Metrics</h4>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="num warn">6</div>
+              <div class="lbl">Complexity</div>
+            </div>
+            <div class="metric-card">
+              <div class="num good">27</div>
+              <div class="lbl">LOC</div>
+            </div>
+            <div class="metric-card">
+              <div class="num good">2</div>
+              <div class="lbl">In-degree</div>
+            </div>
+            <div class="metric-card">
+              <div class="num">3</div>
+              <div class="lbl">Out-degree</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- ===== STATUS BAR (BOTTOM) ===== -->
+  <footer class="statusbar">
+    <div class="status-item">
+      <span class="live-indicator"></span>
+      <span>Ready</span>
+    </div>
+    <div class="status-item">📁 phase2_standard_graph.json</div>
+    <div class="status-item">Phase: <strong style="color: var(--text-primary)">2 (Static)</strong></div>
+    <div class="status-item">14 nodes</div>
+    <div class="status-item">23 edges</div>
+    <div class="status-item">5 files</div>
+    <div class="status-spacer"></div>
+    <div class="status-item">Layout: <strong style="color: var(--text-primary)">Hierarchical LR</strong></div>
+    <div class="status-item">View: <strong style="color: var(--text-primary)">100%</strong></div>
+    <div class="status-item" style="color: var(--text-secondary)">ⓘ UTF-8 · LF</div>
+  </footer>
+
+</div>
+
+<script>
+// ===== SAMPLE DATA =====
+const projectData = {
+  name: 'myapp',
+  modules: [
+    {
+      name: 'app', type: 'package', file: 'app/', children: [
+        { name: '__init__.py', type: 'module', file: 'app/__init__.py' },
+        { name: 'main.py', type: 'module', file: 'app/main.py', children: [
+          { name: 'main()', type: 'function', file: 'app/main.py', line: 12 },
+          { name: 'load_config()', type: 'function', file: 'app/config.py', line: 8 },
+        ]},
+      ]
+    },
+    {
+      name: 'app.auth', type: 'package', file: 'app/auth/', children: [
+        { name: '__init__.py', type: 'module', file: 'app/auth/__init__.py' },
+        { name: 'views.py', type: 'module', file: 'app/auth/views.py', children: [
+          { name: 'LoginView', type: 'class', file: 'app/auth/views.py', line: 18, children: [
+            { name: '.post()', type: 'method', file: 'app/auth/views.py', line: 24 },
+          ]},
+          { name: 'RegisterView', type: 'class', file: 'app/auth/views.py', line: 38, children: [
+            { name: '.post()', type: 'method', file: 'app/auth/views.py', line: 45 },
+          ]},
+        ]},
+        { name: 'services.py', type: 'module', file: 'app/auth/services.py', children: [
+          { name: 'authenticate()', type: 'function', file: 'app/auth/services.py', line: 15 },
+          { name: 'register_user()', type: 'function', file: 'app/auth/services.py', line: 58 },
+        ]},
+      ]
+    },
+    {
+      name: 'app.database', type: 'package', file: 'app/database/', children: [
+        { name: 'connection.py', type: 'module', file: 'app/database/connection.py', children: [
+          { name: 'connect()', type: 'function', file: 'app/database/connection.py', line: 10 },
+          { name: 'disconnect()', type: 'function', file: 'app/database/connection.py', line: 25 },
+        ]},
+        { name: 'queries.py', type: 'module', file: 'app/database/queries.py', children: [
+          { name: 'find_user()', type: 'function', file: 'app/database/queries.py', line: 12 },
+          { name: 'save_user()', type: 'function', file: 'app/database/queries.py', line: 28 },
+        ]},
+      ]
+    },
+    {
+      name: 'app.utils', type: 'package', file: 'app/utils/', children: [
+        { name: 'crypto.py', type: 'module', file: 'app/utils/crypto.py', children: [
+          { name: 'hash_password()', type: 'function', file: 'app/utils/crypto.py', line: 8 },
+          { name: 'verify_password()', type: 'function', file: 'app/utils/crypto.py', line: 18 },
+        ]},
+        { name: 'validation.py', type: 'module', file: 'app/utils/validation.py', children: [
+          { name: 'validate_email()', type: 'function', file: 'app/utils/validation.py', line: 10 },
+        ]},
+      ]
+    },
+  ]
+};
+
+const graphNodes = [
+  { id: 'main',          label: 'main()',            sub: 'app/main.py:12',     type: 'function', x:  80, y: 340 },
+  { id: 'load_config',   label: 'load_config()',     sub: 'app/config.py:8',    type: 'function', x:  80, y: 220 },
+  { id: 'login_post',    label: 'LoginView.post()',  sub: 'app/auth/views.py:24', type: 'method',  x: 280, y: 180 },
+  { id: 'register_post', label: 'RegisterView.post()', sub: 'app/auth/views.py:45', type: 'method', x: 280, y: 360 },
+  { id: 'authenticate',  label: 'authenticate()',    sub: 'app/auth/services.py:15', type: 'function', x: 480, y: 200, selected: true },
+  { id: 'register_user', label: 'register_user()',   sub: 'app/auth/services.py:58', type: 'function', x: 480, y: 380 },
+  { id: 'find_user',     label: 'find_user()',       sub: 'app/db/queries.py:12', type: 'function', x: 680, y: 100 },
+  { id: 'save_user',     label: 'save_user()',       sub: 'app/db/queries.py:28', type: 'function', x: 680, y: 460 },
+  { id: 'verify_pw',     label: 'verify_password()', sub: 'app/utils/crypto.py:18', type: 'function', x: 680, y: 250 },
+  { id: 'hash_pw',       label: 'hash_password()',   sub: 'app/utils/crypto.py:8',  type: 'function', x: 680, y: 540 },
+  { id: 'validate_email',label: 'validate_email()',  sub: 'app/utils/validation.py:10', type: 'function', x: 480, y: 540 },
+  { id: 'connect',       label: 'connect()',         sub: 'app/db/connection.py:10', type: 'function', x: 880, y: 200 },
+  { id: 'disconnect',    label: 'disconnect()',      sub: 'app/db/connection.py:25', type: 'function', x: 880, y: 360 },
+  { id: 'logger',        label: 'logger.info',       sub: 'stdlib',                type: 'external', x: 880, y: 80, external: true },
+];
+
+const graphEdges = [
+  { from: 'main',          to: 'authenticate' },
+  { from: 'main',          to: 'load_config' },
+  { from: 'login_post',    to: 'authenticate', highlighted: true },
+  { from: 'register_post', to: 'register_user' },
+  { from: 'authenticate',  to: 'find_user',     highlighted: true },
+  { from: 'authenticate',  to: 'verify_pw',     highlighted: true },
+  { from: 'authenticate',  to: 'logger' },
+  { from: 'register_user', to: 'hash_pw' },
+  { from: 'register_user', to: 'validate_email' },
+  { from: 'register_user', to: 'save_user' },
+  { from: 'find_user',     to: 'connect' },
+  { from: 'save_user',     to: 'connect' },
+  { from: 'connect',       to: 'disconnect' },
+];
+
+const typeColors = {
+  package:  'var(--type-package)',
+  module:   'var(--type-module)',
+  class:    'var(--type-class)',
+  function: 'var(--type-function)',
+  method:   'var(--type-method)',
+  external: 'var(--type-external)',
+};
+
+// ===== RENDER TREE =====
+function renderTree() {
+  const tree = document.getElementById('tree');
+  tree.innerHTML = '';
+
+  function renderNode(node, depth = 0) {
+    const div = document.createElement('div');
+    const hasChildren = node.children && node.children.length > 0;
+    const isSelected = node.name === 'authenticate()';
+
+    div.className = `tree-node ${node.type}${isSelected ? ' selected' : ''}`;
+    div.style.paddingLeft = (12 + depth * 14) + 'px';
+
+    if (hasChildren) {
+      const caret = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      caret.setAttribute('class', 'tree-caret open');
+      caret.setAttribute('viewBox', '0 0 24 24');
+      caret.setAttribute('fill', 'none');
+      caret.setAttribute('stroke', 'currentColor');
+      caret.setAttribute('stroke-width', '2');
+      caret.innerHTML = '<polyline points="9 18 15 12 9 6"/>';
+      div.appendChild(caret);
+    } else {
+      const spacer = document.createElement('span');
+      spacer.style.width = '14px';
+      div.appendChild(spacer);
+    }
+
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    icon.setAttribute('class', 'icon');
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.setAttribute('fill', 'none');
+    icon.setAttribute('stroke', 'currentColor');
+    icon.setAttribute('stroke-width', '2');
+    if (node.type === 'package') icon.innerHTML = '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>';
+    else if (node.type === 'module') icon.innerHTML = '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>';
+    else if (node.type === 'class') icon.innerHTML = '<circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M9 15c.85.5 1.85.8 3 .8s2.15-.3 3-.8"/>';
+    else if (node.type === 'function') icon.innerHTML = '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>';
+    else if (node.type === 'method') icon.innerHTML = '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>';
+    div.appendChild(icon);
+
+    const label = document.createElement('span');
+    label.className = 'label';
+    label.textContent = node.name;
+    div.appendChild(label);
+
+    if (node.line) {
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = 'L' + node.line;
+      div.appendChild(badge);
+    }
+
+    const wrap = document.createElement('div');
+    wrap.appendChild(div);
+    tree.appendChild(wrap);
+
+    if (hasChildren) {
+      const childrenDiv = document.createElement('div');
+      childrenDiv.className = 'tree-children';
+      node.children.forEach(child => renderNode(child, depth + 1).forEach(el => childrenDiv.appendChild(el)));
+      wrap.appendChild(childrenDiv);
+
+      div.addEventListener('click', (e) => {
+        if (e.target.closest('.tree-caret')) {
+          childrenDiv.classList.toggle('collapsed');
+          caret.classList.toggle('open');
+          return;
+        }
+        document.querySelectorAll('.tree-node.selected').forEach(el => el.classList.remove('selected'));
+        div.classList.add('selected');
+        selectNode(node);
+      });
+    }
+  }
+
+  // Build flat list with depth
+  const flat = [];
+  function walk(items, depth) {
+    items.forEach(item => {
+      flat.push({ node: item, wrap: document.createElement('div') });
+      if (item.children) walk(item.children, depth + 1);
+    });
+  }
+  walk(projectData.modules, 0);
+
+  flat.forEach(({ node, wrap }) => {
+    const div = document.createElement('div');
+    div.className = `tree-node ${node.type}`;
+    div.style.paddingLeft = (12 + (depthOf(node, projectData.modules)) * 14) + 'px';
+
+    if (node.children && node.children.length > 0) {
+      const caret = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      caret.setAttribute('class', 'tree-caret open');
+      caret.setAttribute('viewBox', '0 0 24 24');
+      caret.setAttribute('fill', 'none');
+      caret.setAttribute('stroke', 'currentColor');
+      caret.setAttribute('stroke-width', '2');
+      caret.innerHTML = '<polyline points="9 18 15 12 9 6"/>';
+      div.appendChild(caret);
+    } else {
+      const spacer = document.createElement('span');
+      spacer.style.width = '14px';
+      div.appendChild(spacer);
+    }
+
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    icon.setAttribute('class', 'icon');
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.setAttribute('fill', 'none');
+    icon.setAttribute('stroke', 'currentColor');
+    icon.setAttribute('stroke-width', '2');
+    const icons = {
+      package: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>',
+      module:  '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>',
+      class:   '<circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M9 15c.85.5 1.85.8 3 .8s2.15-.3 3-.8"/>',
+      function:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+      method:  '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+    };
+    icon.innerHTML = icons[node.type] || icons.module;
+    div.appendChild(icon);
+
+    const label = document.createElement('span');
+    label.className = 'label';
+    label.textContent = node.name;
+    div.appendChild(label);
+
+    if (node.line) {
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = 'L' + node.line;
+      div.appendChild(badge);
+    }
+
+    tree.appendChild(div);
+
+    div.addEventListener('click', () => {
+      document.querySelectorAll('.tree-node.selected').forEach(el => el.classList.remove('selected'));
+      div.classList.add('selected');
+    });
+  });
+}
+
+function depthOf(node, items, d = 0) {
+  for (const item of items) {
+    if (item === node) return d;
+    if (item.children) {
+      const found = depthOf(node, item.children, d + 1);
+      if (found !== -1) return found;
+    }
+  }
+  return -1;
+}
+
+// ===== RENDER GRAPH =====
+function renderGraph() {
+  const svg = document.getElementById('graph');
+  const edgesG = document.getElementById('edges');
+  const nodesG = document.getElementById('nodes');
+
+  // Draw edges
+  graphEdges.forEach(edge => {
+    const from = graphNodes.find(n => n.id === edge.from);
+    const to = graphNodes.find(n => n.id === edge.to);
+    if (!from || !to) return;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const x1 = from.x + 110, y1 = from.y + 18;
+    const x2 = to.x, y2 = to.y + 18;
+    const midX = (x1 + x2) / 2;
+    const d = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
+    path.setAttribute('d', d);
+    path.setAttribute('class', `edge ${edge.highlighted ? 'highlighted' : ''}`);
+    path.setAttribute('marker-end', 'url(#arrow)');
+    edgesG.appendChild(path);
+  });
+
+  // Arrow marker
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  defs.innerHTML = `
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted)" opacity="0.6"/>
+    </marker>
+    <marker id="arrow-hl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/>
+    </marker>
+  `;
+  svg.insertBefore(defs, edgesG);
+
+  // Draw nodes
+  graphNodes.forEach(node => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', `node-group ${node.selected ? 'selected' : ''}`);
+    g.setAttribute('transform', `translate(${node.x}, ${node.y})`);
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('class', 'node-rect');
+    rect.setAttribute('width', '110');
+    rect.setAttribute('height', '36');
+    rect.setAttribute('rx', '6');
+    g.appendChild(rect);
+
+    // Color bar on left
+    const bar = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bar.setAttribute('x', '0');
+    bar.setAttribute('y', '0');
+    bar.setAttribute('width', '3');
+    bar.setAttribute('height', '36');
+    bar.setAttribute('rx', '1.5');
+    bar.setAttribute('fill', typeColors[node.type]);
+    g.appendChild(bar);
+
+    // Icon dot
+    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    dot.setAttribute('cx', '14');
+    dot.setAttribute('cy', '12');
+    dot.setAttribute('r', '2.5');
+    dot.setAttribute('fill', typeColors[node.type]);
+    g.appendChild(dot);
+
+    // Label
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('class', 'node-text');
+    text.setAttribute('x', '24');
+    text.setAttribute('y', '15');
+    text.textContent = truncate(node.label, 13);
+    g.appendChild(text);
+
+    // Sub label
+    const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    sub.setAttribute('class', 'node-sub');
+    sub.setAttribute('x', '24');
+    sub.setAttribute('y', '28');
+    sub.textContent = truncate(node.sub, 16);
+    g.appendChild(sub);
+
+    g.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.node-group.selected').forEach(el => el.classList.remove('selected'));
+      g.classList.add('selected');
+    });
+
+    nodesG.appendChild(g);
+  });
+}
+
+function truncate(str, n) {
+  return str.length > n ? str.slice(0, n - 1) + '…' : str;
+}
+
+// Init
+renderTree();
+renderGraph();
+</script>
+</body>
+</html>
